@@ -2,16 +2,20 @@ import { User } from "../interfaces/IUser";
 
 export const customClasses = {
   tableBody: "col-md-2",
-  pageBody: "col-md-12",
-  formContainer: "card card-container",
-  formHeading: "text-2xl  font-medium text-primary mt-4 mb-12 text-center",
+  pageBody:
+    "min-h-screen flex items-center justify-center bg-cover bg-center relative",
+  formContainer:
+    "bg-black bg-opacity-60 p-8 rounded-2xl shadow-lg backdrop-blur-md w-full max-w-md",
+  formHeading: "text-3xl font-bold text-white mb-8 text-center",
+  loadingSpinner:
+    "animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-green-400 mr-2",
   btnContainer: "flex justify-center items-center mt-6",
   inputText:
-    "w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2",
-  inputTextBorder: "border-red-500 focus:ring-red-500",
-  inputErrorBorder: "border-gray-300 focus:ring-blue-500",
-  buttonBase: "btn btn-primary btn-block",
-  loadingSpinner: "spinner-border spinner-border-sm",
+    "w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 transition",
+  inputTextBorder: "border border-gray-700",
+  inputErrorBorder: "border border-red-500",
+  buttonBase:
+    "w-full p-3 rounded-lg bg-green-600 hover:bg-green-700 text-white font-semibold transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed",
   table:
     "w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400",
   tableHead:
@@ -21,6 +25,7 @@ export const customClasses = {
     "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white",
 };
 
+export const BASE_URL = "https://dummyjson.com/";
 export const LOGIN_URL = "https://dummyjson.com/auth/login";
 export const PROFILE_URL = "https://dummyjson.com/auth/me";
 
@@ -51,10 +56,6 @@ export const USERCOLUMNS = [
   {
     Header: "Date Of Birth",
     accessor: "birthDate",
-  },
-  {
-    Header: "Age",
-    accessor: "age",
   },
   {
     Header: "Contact",

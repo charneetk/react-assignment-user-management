@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   useTable,
   useSortBy,
@@ -11,11 +12,13 @@ import { customClasses } from "../utils/constant";
 import { Checkbox } from "./Checkbox";
 import { ColumnFilter } from "./ColumnFilter";
 import { GlobalFilter } from "./GlobalFilter";
+import { ListTodo } from "lucide-react";
 
 export const ReactTable = (props: { tableColumns: any; tableData: any }) => {
   const { tableColumns, tableData } = props;
-
+  console.log("TableDataaa ", tableData);
   const columns = useMemo(() => tableColumns, []);
+  const navigate = useNavigate();
   const data = useMemo(() => tableData, []);
   const defaultColumn = useMemo(() => {
     return {
@@ -47,6 +50,27 @@ export const ReactTable = (props: { tableColumns: any; tableData: any }) => {
             ),
           },
           ...columns,
+          {
+            id: "fetchTodos",
+            Header: "Actions",
+            Cell: ({ row }) => {
+              const userRow = row.original as { [x: string]: any };
+              return (
+                <div className="flex justify-center items-center">
+                  <button
+                    title="Fetch Todos for the User"
+                    className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200"
+                    onClick={() => {
+                      const userId = userRow?.id;
+                      navigate(`/todo/${userId}`);
+                    }}
+                  >
+                    <ListTodo size={20} />
+                  </button>
+                </div>
+              );
+            },
+          },
         ];
       });
     }
@@ -74,50 +98,58 @@ export const ReactTable = (props: { tableColumns: any; tableData: any }) => {
 
   const { globalFilter, pageIndex, pageSize } = state;
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex flex-col items-center min-h-screen p-4 bg-gray-100">
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-      <table className="flex" {...getTableProps()}>
-        <thead className={customClasses.tableHead}>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th
-                  className={customClasses.tableHeadData}
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                >
-                  {column.render("Header")}
-                  <span>
-                    {column.isSorted ? (column.isSortedDesc ? " ▼" : " ▲") : ""}
-                  </span>
-                  <div>{column.canFilter ? column.render("Filter") : null}</div>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td
-                      className={customClasses.tableBodyData}
-                      {...cell.getCellProps()}
-                    >
-                      {" "}
-                      {cell.render("Cell")}
-                    </td>
-                  );
-                })}
+      <div className="w-full overflow-x-auto mt-4">
+        <table className="min-w-full border-collapse" {...getTableProps()}>
+          <thead className={customClasses.tableHead}>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th
+                    className={customClasses.tableHeadData}
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                  >
+                    {column.render("Header")}
+                    <span>
+                      {column.isSorted
+                        ? column.isSortedDesc
+                          ? " ▼"
+                          : " ▲"
+                        : ""}
+                    </span>
+                    <div>
+                      {column.canFilter ? column.render("Filter") : null}
+                    </div>
+                  </th>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map((row) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => {
+                    return (
+                      <td
+                        className={customClasses.tableBodyData}
+                        {...cell.getCellProps()}
+                      >
+                        {" "}
+                        {cell.render("Cell")}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
       <div>
-        <span>
+        <div className="flex flex-wrap justify-center items-center gap-2 mt-4">
           <select
             value={pageSize}
             onChange={(e) => setPageSize(Number(e.target?.value))}
@@ -128,7 +160,7 @@ export const ReactTable = (props: { tableColumns: any; tableData: any }) => {
               </option>
             ))}
           </select>
-        </span>
+        </div>
         <span>
           Page{" "}
           <strong>
@@ -160,7 +192,7 @@ export const ReactTable = (props: { tableColumns: any; tableData: any }) => {
           {">>"}
         </button>
       </div>
-      <pre>
+      <pre className="mt-4">
         <code>
           {JSON.stringify(
             {
