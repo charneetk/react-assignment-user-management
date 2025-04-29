@@ -16,7 +16,6 @@ import { ListTodo } from "lucide-react";
 
 export const ReactTable = (props: { tableColumns: any; tableData: any }) => {
   const { tableColumns, tableData } = props;
-  console.log("TableDataaa ", tableData);
   const columns = useMemo(() => tableColumns, []);
   const navigate = useNavigate();
   const data = useMemo(() => tableData, []);
@@ -25,7 +24,6 @@ export const ReactTable = (props: { tableColumns: any; tableData: any }) => {
       Filter: ColumnFilter,
     };
   }, []);
-  console.log("columns ", columns, data);
   const tableInstance = useTable(
     {
       columns,

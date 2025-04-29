@@ -27,8 +27,6 @@ export const Login: React.FC = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const { errors } = methods.formState;
-
   const handleLogin = async (data: LoginForm) => {
     login(data);
   };

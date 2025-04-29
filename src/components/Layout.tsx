@@ -3,12 +3,12 @@ import { Outlet, useParams } from "react-router-dom";
 import Navbar from "./NavBar";
 import { TodoProvider } from "../contexts/TodoProvider";
 import { useAuth } from "../contexts/AuthProvider";
+import { customClasses } from "../utils/constant";
 
 const Layout = () => {
   const { userId } = useParams();
   const { currentUser } = useAuth();
   let userIdToFetchTodos = undefined;
-  console.log("in layout ", userId, currentUser);
 
   if (userId) {
     userIdToFetchTodos = Number(userId);
@@ -17,10 +17,9 @@ const Layout = () => {
       userIdToFetchTodos = Number(currentUser?.id);
     }
   }
-  console.log("userId to fetch ", userIdToFetchTodos);
   return (
     <div
-      className="min-h-screen bg-cover bg-center font-sans text-gray-800"
+      className={customClasses.layout}
       style={{ backgroundImage: "url('/background.jpg')" }}
     >
       <Navbar />

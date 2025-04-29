@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useAuth } from "../contexts/AuthProvider";
 import { User } from "../interfaces/IUser";
 import * as AuthService from "../services/AuthService";
+import { customClasses } from "../utils/constant";
 
 const Profile: React.FC = () => {
   const [userProfile, setUserProfile] = useState<User | undefined>(undefined);
@@ -19,9 +19,9 @@ const Profile: React.FC = () => {
     fetchProfile();
   }, []);
   return (
-    <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden border border-gray-200">
+    <div className={customClasses.profileContainer}>
       <img
-        className="w-full h-56 object-cover"
+        className={customClasses.imageContainer}
         src={userProfile?.image}
         alt={`${userProfile?.firstName}'s avatar`}
       />
@@ -29,25 +29,25 @@ const Profile: React.FC = () => {
         <h2 className="text-xl font-semibold text-gray-800">
           {userProfile?.firstName} {userProfile?.lastName}
         </h2>
-        <p className="text-sm text-gray-500">
+        <p className={customClasses.profileText}>
           @{userProfile?.username} - {userProfile?.role}
         </p>
 
         <div className="mt-4">
-          <p className="text-sm text-gray-600">
+          <p className={customClasses.profileText}>
             <strong>Email:</strong> {userProfile?.email}
           </p>
-          <p className="text-sm text-gray-600">
+          <p className={customClasses.profileText}>
             <strong>Phone:</strong> {userProfile?.phone}
           </p>
-          <p className="text-sm text-gray-600">
+          <p className={customClasses.profileText}>
             <strong>Location:</strong> {userProfile?.address?.city},{" "}
             {userProfile?.address?.state}
           </p>
-          <p className="text-sm text-gray-600">
+          <p className={customClasses.profileText}>
             <strong>Company:</strong> {userProfile?.company?.name}
           </p>
-          <p className="text-sm text-gray-600">
+          <p className={customClasses.profileText}>
             <strong>University:</strong> {userProfile?.university}
           </p>
         </div>

@@ -24,7 +24,6 @@ export const TodoProvider = ({ children, userId }: TodoProviderProps) => {
   const [todos, setTodos] = useState<TodoItem[]>([]);
 
   // Fetch todos using useFetchTodos from the TodoService
-  console.log("UserId for Todo Provider ", userId);
   const { data, isLoading, isError } = useFetchTodos(userId);
 
   // When data is fetched successfully, update the context state with fetched todos

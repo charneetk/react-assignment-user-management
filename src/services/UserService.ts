@@ -1,5 +1,5 @@
 import { QueryObserverResult, useQuery } from "@tanstack/react-query";
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { User, UserResponse } from "../interfaces/IUser";
 import { client } from "./client";
 

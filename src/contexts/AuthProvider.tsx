@@ -57,7 +57,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setLoading(true);
     await loginAPI(credentials)
       .then(async (res) => {
-        console.log("res ", res);
         if (res) {
           const { accessToken, refreshToken, ...user } = res;
           const profile = await getUserProfile(accessToken);

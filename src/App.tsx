@@ -9,7 +9,6 @@ import { useParams } from "react-router-dom";
 
 const App: React.FC = () => {
   const { userId } = useParams();
-  console.log("userId to pass ", userId);
   return (
     <>
       <AuthProvider>

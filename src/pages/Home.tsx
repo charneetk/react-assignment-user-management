@@ -9,26 +9,22 @@ const Home: React.FC = () => {
           Welcome to User Task Manager
         </h1>
 
-        {/* Introduction paragraph */}
         <p className={customClasses.inputText}>
           This application is designed to help you stay organized and
           productive.
         </p>
 
-        {/* Moderator's role description with list */}
         <p className={customClasses.inputText}>
           <strong>Moderators</strong> can view and manage their own to-do lists,
           keeping track of personal tasks and making updates as needed.
         </p>
 
-        {/* Admin's role description with list */}
         <p className={customClasses.inputText}>
           <strong>Admins</strong> have a broader overview, allowing them to
           manage the to-do lists of all users, providing support and overseeing
           team tasks.
         </p>
 
-        {/* Call to action */}
         <p className={customClasses.inputText}>
           Simply log in to access your personalized dashboard and start managing
           tasks efficiently!

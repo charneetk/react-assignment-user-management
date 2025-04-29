@@ -28,7 +28,6 @@ const fetchTodos = async (
 export const useFetchTodos = (
   userId: number | undefined
 ): QueryObserverResult<TodoItem[], any> => {
-  console.log("userId in Query ", userId);
   return useQuery<TodoItem[], any>({
     queryFn: async () => {
       const { data } = await fetchTodos(userId);
@@ -94,7 +93,6 @@ export const useUpdateTodo = () => {
     mutationFn: ({ id, ...todo }: { id: number } & UpdateTodoItem) =>
       updateTodo(id, todo),
     onSuccess: (response) => {
-      console.log("update resopnse", response);
       const updatedTodo = response.data;
 
       // queryClient.setQueryData(
@@ -117,7 +115,6 @@ export const useUpdateTodo = () => {
       // If server returns 404, we still update local state using the update payload
       if (error?.response?.status === 404) {
         const { id, ...rest } = variables;
-        console.log("Id to Update ", id, rest);
         setTodos((prevTodos) =>
           prevTodos.map((todo) =>
             todo.id === id ? { ...todo, ...rest } : todo
@@ -131,7 +128,6 @@ export const useUpdateTodo = () => {
 const deleteTodo = async (
   id: number
 ): Promise<AxiosResponse<TodoItem, any>> => {
-  console.log("delete todo ", id);
   return await client.delete<TodoItem>(`/todos/${id}`);
 };
 

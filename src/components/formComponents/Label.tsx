@@ -1,4 +1,5 @@
 import React from "react";
+import { customClasses } from "../../utils/constant";
 
 interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
   text: string;
@@ -15,7 +16,7 @@ const Label: React.FC<LabelProps> = ({
   ...props
 }) => {
   return (
-    <label htmlFor={htmlFor} className="block text-gray-300 mb-2" {...props}>
+    <label htmlFor={htmlFor} className={customClasses.labelText} {...props}>
       {text}
     </label>
   );

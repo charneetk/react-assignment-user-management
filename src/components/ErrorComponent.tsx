@@ -1,4 +1,5 @@
 import React from "react";
+import { customClasses } from "../utils/constant";
 
 type ErrorMessageProps = {
   message?: string | null;
@@ -11,7 +12,7 @@ const ErrorComponent: React.FC<ErrorMessageProps> = ({
 }) => {
   if (!message) return null;
 
-  return <p className={className || "error-message"}>{message}</p>;
+  return <p className={customClasses.errorComponent}>{message}</p>;
 };
 
 export default ErrorComponent;

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthProvider";
-import * as AuthService from "../services/AuthService";
+import { customClasses } from "../utils/constant";
 
 interface Props {}
 
@@ -9,25 +9,25 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
+      <nav className={customClasses.navigationBar}>
         <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/home"} className="nav-link">
+          <li className={customClasses.navigationItem}>
+            <Link to={"/home"} className={customClasses.navigationLink}>
               Home
             </Link>
           </li>
 
           {currentUser && currentUser?.role === "admin" && (
-            <li className="nav-item">
-              <Link to={"/user"} className="nav-link">
+            <li className={customClasses.navigationItem}>
+              <Link to={"/user"} className={customClasses.navigationLink}>
                 User
               </Link>
             </li>
           )}
 
           {currentUser && (
-            <li className="nav-item">
-              <Link to={"/todo"} className="nav-link">
+            <li className={customClasses.navigationItem}>
+              <Link to={"/todo"} className={customClasses.navigationLink}>
                 Todo
               </Link>
             </li>
@@ -36,27 +36,27 @@ const Navbar = () => {
 
         {currentUser ? (
           <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/profile"} className="nav-link">
+            <li className={customClasses.navigationItem}>
+              <Link to={"/profile"} className={customClasses.navigationLink}>
                 {currentUser.username}
               </Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" onClick={logout}>
+            <li className={customClasses.navigationItem}>
+              <a className={customClasses.navigationLink} onClick={logout}>
                 LogOut
               </a>
             </li>
           </div>
         ) : (
           <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/login"} className="nav-link">
+            <li className={customClasses.navigationItem}>
+              <Link to={"/login"} className={customClasses.navigationLink}>
                 Login
               </Link>
             </li>
 
-            <li className="nav-item">
-              <Link to={"/register"} className="nav-link">
+            <li className={customClasses.navigationItem}>
+              <Link to={"/register"} className={customClasses.navigationLink}>
                 Sign Up
               </Link>
             </li>

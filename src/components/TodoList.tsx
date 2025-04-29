@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthProvider";
 import { useTodoContext } from "../contexts/TodoProvider";
 import { useAddTodo } from "../services/TodoService";
+import { customClasses } from "../utils/constant";
 import Button from "./formComponents/Button";
 import InputText from "./formComponents/InputText";
 import SingleTodo from "./SingleTodo";
@@ -31,8 +32,8 @@ const TodoList: React.FC = () => {
   };
 
   return (
-    <div className="bg-black bg-opacity-70 backdrop-blur-lg rounded-3xl p-8 shadow-2xl w-full max-w-lg space-y-6">
-      <h1 className="text-4xl font-bold text-center text-white">Todo App</h1>
+    <div className={customClasses.todoList}>
+      <h1 className={customClasses.listHeading}>ToDo List</h1>
       {currentUser?.id ? (
         <>
           <div className="flex items-center gap-2 w-full">
@@ -44,7 +45,7 @@ const TodoList: React.FC = () => {
                 target: { value: React.SetStateAction<string> };
               }) => setInput(e.target.value)}
               value={input}
-              className="flex-1 p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className={customClasses.addToDo}
             />
             <Button
               onClick={() => {
@@ -55,7 +56,7 @@ const TodoList: React.FC = () => {
                 });
                 setInput("");
               }}
-              className="w-12 h-12 flex items-center justify-center bg-green-600 hover:bg-green-700 rounded-lg transition"
+              className={customClasses.addButton}
             >
               <Plus size={20} />
             </Button>
@@ -74,7 +75,7 @@ const TodoList: React.FC = () => {
               <button
                 onClick={handlePrev}
                 disabled={currentPage === 1}
-                className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg disabled:opacity-40 disabled:cursor-not-allowed"
+                className={customClasses.pageButton}
               >
                 Previous
               </button>
@@ -84,7 +85,7 @@ const TodoList: React.FC = () => {
               <button
                 onClick={handleNext}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg disabled:opacity-40 disabled:cursor-not-allowed"
+                className={customClasses.pageButton}
               >
                 Next
               </button>
@@ -94,46 +95,6 @@ const TodoList: React.FC = () => {
       ) : null}
     </div>
   );
-
-  // return (
-  //   <>
-  //     <div className="flex flex-col md:flex-row gap-4 mb-6">
-  //       <div className="flex-1">
-  //         <InputText
-  //           name="task"
-  //           label=""
-  //           type="text"
-  //           placeholder="Add a new task..."
-  //           onChange={(e: {
-  //             target: { value: React.SetStateAction<string> };
-  //           }) => setInput(e.target.value)}
-  //         />
-  //       </div>
-  //       <Button
-  //         onClick={() => addTodo({ todo: input, completed: false })}
-  //         className="bg-purple-700 hover:bg-purple-800 text-white text-sm font-medium py-2 px-4 rounded-md"
-  //       >
-  //         Add Todo
-  //       </Button>
-  //     </div>
-  //     <div className="space-y-4">
-  //       {todoList?.length > 0 ? (
-  //         todoList.map((todo: TodoItem) => (
-  //           <SingleTodo
-  //             key={todo.id}
-  //             todo={todo}
-  //             completeTodo={completeTodo}
-  //             deleteTodo={deleteTodo}
-  //           />
-  //         ))
-  //       ) : (
-  //         <h2 className="text-center text-gray-600 text-lg mt-8">
-  //           All todos completed!
-  //         </h2>
-  //       )}
-  //     </div>
-  //   </>
-  // );
 };
 
 export default TodoList;

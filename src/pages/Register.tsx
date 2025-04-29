@@ -34,7 +34,6 @@ export const Register: React.FC = () => {
     },
     resolver: yupResolver(registerSchema),
   });
-  const { errors, isDirty, isValid } = methods.formState;
 
   return (
     <FormProvider {...methods}>
